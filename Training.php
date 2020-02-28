@@ -21,11 +21,8 @@ class Training {
      */
     public function __construct() {
 
-        // Работает ли обучение через систему Polyaxon
-        $is_polyaxon = Settings::isPolyaxon();
-
         // Название класса системы обучения
-        $ClientClassName = __NAMESPACE__ . "\\Clients\\" . ($is_polyaxon ? 'Polyaxon' : 'Kubernetes');
+        $ClientClassName = __NAMESPACE__ . "\\Clients\\" . Settings::getByName("training"); 
 
         // Получение экземпляра класса
         $this->client = $ClientClassName::getInstance();
