@@ -375,6 +375,8 @@ class Polyaxon extends Clients {
             if (in_array($experiment['last_status'], ['warning', 'unschedulable', 'unknown'])) {
                 // Получение сообщения об ошибке в системе Polyaxon
                 $error_message = $this->getErrorMessage($experiment['id']);
+            } else {
+                $error_message = null;
             }
 
             // Если один из экспериментов в работе
@@ -393,7 +395,7 @@ class Polyaxon extends Clients {
                 'date_end' => $date_end,
                 'step' => $experiment['last_metric']['step'] ?? null,
                 'percent' => isset($experiment['last_metric']['train_net_percentage']) ? intval($experiment['last_metric']['train_net_percentage']) : 0,
-                'error_message' => $error_message ?? null,
+                'error_message' => $error_message
             ];
         }
 
